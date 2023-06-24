@@ -2,26 +2,11 @@
 
 import Image from "next/image";
 import Router from "next/router";
+import { Author, Event } from "@types";
 import dateUtils from "@/services/date-utils";
 import stringUtils from "@/services/string-utils";
 
 import "@/styles/animations.css";
-
-interface Author {
-	id: number;
-	name: string;
-}
-
-interface Event {
-	id: numver;
-	date: date;
-	title: string;
-	image: string;
-	author: Author;
-	category: string;
-	location: string;
-	description: string;
-}
 
 export default function HomeCard({
 	id,
@@ -39,17 +24,6 @@ export default function HomeCard({
 	const cardClicked = () => {
 		Router.push({
 			pathname: `/event/${id}`,
-			state: {
-				event: {
-					id,
-					date,
-					title,
-					image,
-					author,
-					category,
-					description,
-				},
-			},
 		});
 	};
 
