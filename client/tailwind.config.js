@@ -4,16 +4,16 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/shared/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        // 'custom-red': '#FDD6DF',
-        // 'secondary': '#DAEAEE',
-        // 'terciary': '#CCF4E3',
-        // 'primary': '#E9DDD5',
-        // 'background': '#101436'
+        myRed: "#FF4D2D",
+        myPurple: "#614CF5",
+        myDarkGrey: "#AEAEAE",
+        myLightGrey: "#F2F2F2",
+        myLightBlue: "#F6F8FD",
       },
       screens: {
         xs: "0px",
