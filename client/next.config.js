@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+	images: {
+		// Add my server url
+		domains: ["larevuetech.fr", "i.pinimg.com", "wallpapercave.com"],
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

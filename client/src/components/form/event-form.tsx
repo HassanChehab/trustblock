@@ -54,7 +54,7 @@ export default function EventForm() {
 					setForm({ ...form, description: e.target.value })
 				}
 				className="
-				rounded-lg bg-myLightGrey border-transparent focus:border-0 focus:ring-0 placeholder-myDarkGrey
+				rounded-3xl bg-myLightGrey border-transparent focus:border-0 focus:ring-0 placeholder-myDarkGrey
 				mt-8
 			"
 			/>
