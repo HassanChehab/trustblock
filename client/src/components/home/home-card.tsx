@@ -30,7 +30,7 @@ export default function HomeCard({
 	return (
 		<div
 			onClick={cardClicked}
-			className="w-[20em] h-[25em] rounded-3xl overflow-hidden drop-shadow-xl bg-white relative cursor-pointer home-card-move-up"
+			className="w-[20em] h-[25em] rounded-3xl overflow-hidden drop-shadow-xl bg-white relative cursor-pointer"
 		>
 			<div className="h-[60%] relative">
 				<Image layout="fill" src={image} alt="Card image" />

@@ -11,8 +11,8 @@ export default function Navbar({
 	search,
 	setSearch,
 }: {
-	search: string | null;
 	setSearch: Function;
+	search: string | null;
 }) {
 	const router = useRouter();
 	const dataForInput = { search };

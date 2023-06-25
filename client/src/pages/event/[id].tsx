@@ -1,11 +1,14 @@
 import Image from "next/image";
 import { Event } from "@types";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import dateUtils from "@/services/date-utils";
 import type { GetServerSideProps } from "next";
 import { MdLocationPin } from "react-icons/md";
 import { FaCalendarWeek } from "react-icons/fa";
-import Button from "@/components/shared/button";
+import DangerButton from "@/components/shared/danger-button";
+import PrimaryButton from "@/components/shared/primary-button";
+import OutlinedButton from "@/components/shared/outlined-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -117,9 +120,8 @@ function TopRow({
 						<ConditionalRendering shouldDisplay={isAuthenticated}>
 							<div className="flex gap-4">
 								<div className="w-[150px] mt-8">
-									<Button
+									<OutlinedButton
 										label="update event"
-										buttonStyle="outlined"
 										action={() =>
 											console.log(
 												"no action for this button"
@@ -127,10 +129,9 @@ function TopRow({
 										}
 									/>
 								</div>
-								<div className="w-[100px] mt-8">
-									<Button
+								<div className="w-[150px] mt-8">
+									<DangerButton
 										label="delete"
-										buttonStyle="danger"
 										action={() =>
 											console.log(
 												"no action for this button"
@@ -160,9 +161,8 @@ function TopRow({
 							</p>
 						</div>
 						<div className="w-[150px] mt-8">
-							<Button
+							<PrimaryButton
 								label="register"
-								buttonStyle="primary"
 								action={() =>
 									console.log("no action for this button")
 								}
@@ -212,8 +212,8 @@ function BottomDiv({ fetchedEvent }) {
 }
 
 export default function EventPage({ fetchedEvent }: { fetchedEvent: Event }) {
-	// Todo: replace that variable by the actual value from nextAuth
-	const isAuthenticated = true;
+	const { status } = useSession();
+	const isAuthenticated = status === "authenticated";
 
 	return (
 		<div className="w-full h-fit-content bg-myLightBlue">
