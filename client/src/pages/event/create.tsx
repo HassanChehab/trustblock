@@ -1,6 +1,6 @@
 import Upload from "@/components/form/upload";
-import Button from "@/components/shared/button";
 import EventForm from "@/components/form/event-form";
+import PrimaryButton from "@/components/shared/primary-button";
 
 export default function EventFormPage() {
 	const onFormSubmit = () => {
@@ -11,7 +11,7 @@ export default function EventFormPage() {
 		<div className="w-full h-[100vh] overflow-hidden">
 			<h1
 				className="
-				2xl:ml-24 2xl:mr-24 2xl:mt-32	md:ml-8 md:mr-8 md:mt-32    xs:ml-4 xs:mr-4: mt-4
+				2xl:ml-24 2xl:mr-24 2xl:mt-16	md:ml-8 md:mr-8 md:mt-16    xs:ml-4 xs:mr-4: mt-4
 				md:text-3xl   xs:text-2xl
 			"
 			>
@@ -59,11 +59,7 @@ export default function EventFormPage() {
 				2xl:ml-24 2xl:mr-24 2xl:mt-8 md:ml-8 md:mr-8 md:mt-8    xs:ml-4 xs:mr-4 mt-8
 			"
 			>
-				<Button
-					label="Continue"
-					action={onFormSubmit}
-					buttonStyle="primary"
-				/>
+				<PrimaryButton label="Continue" action={onFormSubmit} />
 			</div>
 		</div>
 	);

@@ -63,18 +63,18 @@ const mockedData = [
 ];
 
 import "@/styles/animations.css";
-import Button from "@/components/shared/button";
 import HomeCard from "@/components/home/home-card";
+import PrimaryButton from "@/components/shared/primary-button";
 
 export default function HomePage() {
 	// Todo: replace that variable by the actual value from nextAuth
 	const isAuthenticated = false;
 
 	return (
-		<div className="w-full h-fit overflow-hidden">
+		<div className="w-full h-fit m-h-[100vh] overflow-hidden">
 			<h1
 				className="
-				2xl:ml-24 2xl:mr-24 2xl:mt-32  md:ml-8 md:mr-8 md:mt-32    xs:ml-4 xs:mr-4 xs:mt-4
+				2xl:ml-24 2xl:mr-24 2xl:mt-16  md:ml-8 md:mr-8 md:mt-16    xs:ml-4 xs:mr-4 xs:mt-4
 				md:text-3xl   xs:text-2xl
 			"
 			>
@@ -82,6 +82,7 @@ export default function HomePage() {
 			</h1>
 			<div
 				className="
+				overflow-auto
 				w-fit-content min-h-[500px] h-fit-content 
 				flex flex-wrap gap-4 xs:justify-center md:justify-start
 				2xl:ml-24 2xl:mr-24 2xl:mt-4  md:ml-8 md:mr-8 md:mt-4    xs:ml-4 xs:mr-4 xs:mt-4
@@ -100,9 +101,8 @@ export default function HomePage() {
 				})}
 			</div>
 			<div className="w-[150px] m-auto">
-				<Button
+				<PrimaryButton
 					label="See More"
-					buttonStyle="primary"
 					action={() => console.log("no action for this button")}
 				/>
 			</div>

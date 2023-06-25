@@ -186,11 +186,11 @@ function BottomDiv({ fetchedEvent }) {
 			lg:h-[35em] xs:h-fit-content lg:pl-24 xs:pl-16
 		"
 		>
-			<div className="lg:mt-32 xs:mt-8 w-full">
+			<div className="lg:mt-16 xs:mt-8 w-full">
 				<p className="text-md prose">{fetchedEvent.description}</p>
 			</div>
 			<div className="w-full">
-				<div className="flex gap-4 lg:mt-32 xs:mt-8">
+				<div className="flex gap-4 lg:mt-16 xs:mt-8">
 					<FaCalendarWeek className="w-[30px] h-[30px] text-myPurple" />
 					<div>
 						<p>Date and time: </p>
