@@ -12,7 +12,7 @@ export default function Footer() {
 			<div className="flex gap-16 xs:mr-16 mt-14 lg:mr-32 text-myDarkGrey text-bold">
 				<Link href="/home">Home</Link>
 				<Link href="/event/create">Create Event</Link>
-				<Link href="/home">Sign Up</Link>
+				<Link href="/api/auth/signin">Sign Up</Link>
 				<Link href="/home">Explore Event</Link>
 			</div>
 		</div>

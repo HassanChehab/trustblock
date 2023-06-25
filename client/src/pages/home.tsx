@@ -5,7 +5,7 @@ const mockedData = [
 		title: "Very long title in here, needs to be longer",
 		date: new Date(),
 		category: "Art",
-		Location: "Paris",
+		location: "Paris",
 		description:
 			"\
 						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
@@ -25,7 +25,7 @@ const mockedData = [
 		title: "Gaming",
 		date: new Date(),
 		category: "Art",
-		Location: "Paris",
+		location: "Paris",
 		description:
 			"\
 						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
@@ -45,7 +45,7 @@ const mockedData = [
 		title: "Cooking",
 		date: new Date(),
 		category: "Art",
-		Location: "Paris",
+		location: "Paris",
 		description:
 			"\
 						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \

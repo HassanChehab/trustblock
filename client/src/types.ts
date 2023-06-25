@@ -4,8 +4,8 @@ export interface Author {
 }
 
 export interface Event {
-	id: numver;
-	date: date;
+	id: number;
+	date: Date;
 	title: string;
 	image: string;
 	author: Author;

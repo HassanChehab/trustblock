@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Router from "next/router";
-import { Author, Event } from "@types";
+import { Author, Event } from "../../types";
 import dateUtils from "@/services/date-utils";
 import stringUtils from "@/services/string-utils";
 

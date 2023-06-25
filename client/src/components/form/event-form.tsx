@@ -47,8 +47,7 @@ export default function EventForm() {
 
 			{/* Description */}
 			<textarea
-				rows="8"
-				type="text"
+				rows={8}
 				placeholder="Description"
 				onChange={(e: any) =>
 					setForm({ ...form, description: e.target.value })
@@ -65,7 +64,7 @@ export default function EventForm() {
 					storedData={form}
 					targetField="date"
 					iconType="calendar"
-					userIntput={form.date}
+					userInput={form.date}
 					dataModifier={setForm}
 					placeholder="Event Date"
 				/>
@@ -78,7 +77,7 @@ export default function EventForm() {
 					storedData={form}
 					targetField="location"
 					dataModifier={setForm}
-					userIntput={form.location}
+					userInput={form.location}
 					placeholder="Event Location"
 				/>
 			</div>

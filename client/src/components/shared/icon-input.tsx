@@ -5,21 +5,21 @@ import { AiOutlineSearch } from "react-icons/ai";
 // This component is used by a form.
 // It should always take an object even if there is only one key in that object => search bar
 export default function IconInput({
-	useInput,
 	iconType,
+	userInput,
 	storedData,
 	placeholder,
 	targetField,
 	dataModifier,
 }: {
-	useInput: string;
 	iconType: string;
+	userInput: string;
 	storedData: object;
 	placeholder: string;
 	targetField: string;
 	dataModifier: Function;
 }) {
-	const iconList = {
+	const iconList: any = {
 		pin: (
 			<MdLocationPin className="w-[25px] h-[25px] text-myDarkGrey mt-2 ml-4" />
 		),
