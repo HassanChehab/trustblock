@@ -3,15 +3,13 @@
 import { useState } from "react";
 import IconInput from "@/components/shared/icon-input";
 
-export default function EventForm() {
-	const [form, setForm] = useState({
-		date: "",
-		title: "",
-		location: "",
-		category: "",
-		description: "",
-	});
-
+export default function EventForm({
+	form,
+	setForm,
+}: {
+	form: any;
+	setForm: any;
+}) {
 	return (
 		<div className="w-full h-full flex flex-col">
 			<div
