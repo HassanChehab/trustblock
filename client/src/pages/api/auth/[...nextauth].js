@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 
 export const authOptions = {
 	// Providers Configuration
+	// redirect: false,
 	adapter: PrismaAdapter(prisma),
 	secret: process.env.NEXTAUTH_SECRET,
 	providers: [
@@ -17,9 +18,6 @@ export const authOptions = {
 	],
 	session: {
 		jwt: true,
-	},
-	pages: {
-		// custom pages
 	},
 	debug: true,
 };

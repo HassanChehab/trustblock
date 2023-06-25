@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Footer() {
 	return (
-		<div className="w-full lg:absolute lg:bottom-0 h-[8em] bg-myLightGrey flex justify-between">
+		<div className="w-full 2xl:absolute 2xl:bottom-0 h-[8em] bg-myLightGrey flex justify-between">
 			<div className="w-[200px] h-[80px] bg-red-200 mt-6 ml-3 relative">
 				<Image layout="fill" src="/footer-logo.png" alt="Footer log" />
 			</div>
