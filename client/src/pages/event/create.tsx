@@ -8,7 +8,7 @@ export default function EventFormPage() {
 	};
 
 	return (
-		<div className="w-full h-fit">
+		<div className="w-full h-[100vh] overflow-hidden">
 			<h1
 				className="
 				2xl:ml-24 2xl:mr-24 2xl:mt-32	md:ml-8 md:mr-8 md:mt-32    xs:ml-4 xs:mr-4: mt-4
@@ -59,7 +59,11 @@ export default function EventFormPage() {
 				2xl:ml-24 2xl:mr-24 2xl:mt-8 md:ml-8 md:mr-8 md:mt-8    xs:ml-4 xs:mr-4 mt-8
 			"
 			>
-				<Button label="Continue" action={onFormSubmit} />
+				<Button
+					label="Continue"
+					action={onFormSubmit}
+					buttonStyle="primary"
+				/>
 			</div>
 		</div>
 	);

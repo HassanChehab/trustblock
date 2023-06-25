@@ -1,11 +1,12 @@
 import "../styles/global.css";
+import Footer from "./shared/footer";
 
 export default function Layout({ children }) {
 	return (
-		<>
+		<div className="relative h-[100vh]">
 			{/* header */}
 			<main>{children}</main>
-			{/* footer */}
-		</>
+			<Footer />
+		</div>
 	);
 }
