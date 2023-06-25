@@ -199,7 +199,7 @@ function BottomDiv({ fetchedEvent }) {
 						<p>1:00 AM - 1:30 AM WIB</p>
 					</div>
 				</div>
-				<div className="flex gap-4 lg:mt-16 xs: mt-8">
+				<div className="flex gap-4 lg:mt-16 xs: mt-8 xs:pb-8">
 					<MdLocationPin className="w-[35px] h-[35px] text-myPurple" />
 					<div>
 						<p>Location: </p>

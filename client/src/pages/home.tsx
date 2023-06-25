@@ -63,6 +63,7 @@ const mockedData = [
 ];
 
 import "@/styles/animations.css";
+import Button from "@/components/shared/button";
 import HomeCard from "@/components/home/home-card";
 
 export default function HomePage() {
@@ -97,6 +98,13 @@ export default function HomePage() {
 						</div>
 					);
 				})}
+			</div>
+			<div className="w-[150px] m-auto">
+				<Button
+					label="See More"
+					buttonStyle="primary"
+					action={() => console.log("no action for this button")}
+				/>
 			</div>
 		</div>
 	);
