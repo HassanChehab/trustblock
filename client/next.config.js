@@ -5,7 +5,9 @@ const nextConfig = {
 		// Add my server url
 		domains: ["larevuetech.fr", "i.pinimg.com", "wallpapercave.com"],
 	},
-	env: {
+
+	env: { 
+		SERVER_URL: "http://localhost:4000",
 		NEXTAUTH_SECRET: "superSecret!hello",
 		NEXTAUTH_FROM: "hassan.dev.smtp@gmail.com",
 		NEXTAUTH_EMAIL_SERVER:

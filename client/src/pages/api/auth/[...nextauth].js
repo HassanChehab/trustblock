@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 
 export const authOptions = {
 	// Providers Configuration
+	// redirect: false,
 	adapter: PrismaAdapter(prisma),
 	secret: process.env.NEXTAUTH_SECRET,
 	providers: [
@@ -18,27 +19,6 @@ export const authOptions = {
 	session: {
 		jwt: true,
 	},
-	pages: {
-		// custom pages
-	},
-	// callbacks: {
-	// 	jwt({ token, account, user }) {
-	// 		console.log("IN JWT", token, acount, user);
-	// 		if (account) {
-	// 			token.accessToken = account.access_token;
-	// 			token.id = user?.id;
-	// 		}
-	// 		return token;
-	// 	},
-	// 	session({ session, token }) {
-	// 		console.log("IN SESSION", session, token);
-	// 		// I skipped the line below coz it gave me a TypeError
-	// 		// session.accessToken = token.accessToken;
-	// 		session.user.id = token.id;
-
-	// 		return session;
-	// 	},
-	// },
 	debug: true,
 };
 

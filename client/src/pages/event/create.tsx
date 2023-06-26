@@ -29,8 +29,8 @@ export default function EventFormPage() {
 			const formData = new FormData();
 
 			formData.append("image", selectedFile);
-			// formData.append("authorId", data?.user.email);
-			// for (const key in form) formData.append(key, form[key]);
+			formData.append("authorId", data?.user.email);
+			for (const key in form) formData.append(key, form[key]);
 
 			await eventApiService.createEvent(formData);
 		} catch (error) {
@@ -52,8 +52,8 @@ export default function EventFormPage() {
 
 				<p
 					className="
-				 2xl:ml-24 2xl:mr-24 2xl:mt-4  md:ml-8 md:mr-8 md:mt-4    xs:ml-4 xs:mr-4 xs:mt-4
-			"
+						2xl:ml-24 2xl:mr-24 2xl:mt-4  md:ml-8 md:mr-8 md:mt-4    xs:ml-4 xs:mr-4 xs:mt-4
+					"
 				>
 					Please fill all the required information
 				</p>
