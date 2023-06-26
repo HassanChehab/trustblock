@@ -58,7 +58,7 @@ export default function Navbar({
 							action={goToFormPage}
 						/>
 					</div>
-					<div className="w-[100px]">
+					<div className="w-[150px]">
 						<DangerButton
 							label="Disconnect"
 							buttonStyle="danger"

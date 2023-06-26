@@ -8,6 +8,18 @@ class EventApiService {
 			body: data,
 		});
 	}
+
+	fetchEvents() {
+		return fetch(`${process.env.SERVER_URL}/events`, {
+			method: "GET",
+		});
+	}
+
+	deleteEvent(id) {
+		return fetch(`${process.env.SERVER_URL}/events/${id}`, {
+			method: "DELETE",
+		});
+	}
 }
 
 export default new EventApiService();

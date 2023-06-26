@@ -6,13 +6,14 @@ import {
 	Patch,
 	Param,
 	Delete,
+	HttpStatus,
 	UploadedFile,
+	HttpException,
 	UseInterceptors,
 } from '@nestjs/common';
 
 import { UploadService } from '../upload.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -27,29 +28,72 @@ export class EventsController {
 	@Post()
 	@UseInterceptors(FileInterceptor('image'))
 	create(@UploadedFile() file: Express.Multer.File, @Body() data: any) {
-		const url = this.uploadService.generateFile(file);
-		// Create actual event
+		// Not Ideal but will do
+		const validLocations = [
+			'paris',
+			'tokyo',
+			'dubai',
+			'blida',
+			'madrid',
+			'gotham',
+			'london',
+			'wakanda',
+			'new york',
+			'istanbul',
+		];
 
-		return { statusCode: 201 };
+		// Check if location is valid
+		if (!validLocations.includes(data?.location.toLowerCase()))
+			throw new HttpException(
+				'You did not provide a valid location',
+				HttpStatus.BAD_REQUEST,
+			);
+
+		try {
+			// Check if image is valid
+			const isValid = this.uploadService.isFileValid(file);
+
+			if (!isValid)
+				throw new HttpException('Invalid File', HttpStatus.FORBIDDEN);
+
+			// Generate image store it in public folder and get Url
+			const url: string = this.uploadService.generateFile(file);
+
+			// Create Object prior to event Creation
+			const eventData: CreateEventDto = { image: url, ...data };
+
+			// Create Event
+			this.eventsService.create(eventData);
+
+			return { status: HttpStatus.CREATED };
+		} catch (error) {
+			console.log('', error);
+			throw new HttpException(
+				'Internal Server Error',
+				HttpStatus.INTERNAL_SERVER_ERROR,
+			);
+		}
 	}
 
 	@Get()
 	findAll() {
+		// handle offset and pagination
 		return this.eventsService.findAll();
 	}
 
 	@Get(':id')
 	findOne(@Param('id') id: string) {
-		return this.eventsService.findOne(+id);
+		return this.eventsService.findOne(Number(id));
 	}
 
 	@Patch(':id')
 	update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-		return this.eventsService.update(+id, updateEventDto);
+		return this.eventsService.update(Number(id), updateEventDto);
 	}
 
 	@Delete(':id')
 	remove(@Param('id') id: string) {
-		return this.eventsService.remove(+id);
+		// delete image
+		return this.eventsService.remove(Number(id));
 	}
 }

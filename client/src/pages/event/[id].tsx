@@ -6,80 +6,17 @@ import dateUtils from "@/services/date-utils";
 import type { GetServerSideProps } from "next";
 import { MdLocationPin } from "react-icons/md";
 import { FaCalendarWeek } from "react-icons/fa";
+import eventService from "@/services/event-service";
 import DangerButton from "@/components/shared/danger-button";
 import PrimaryButton from "@/components/shared/primary-button";
 import OutlinedButton from "@/components/shared/outlined-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-	// Todo: Api call to get element by id
-	// Todo: remove once back is operational
-	const mockedData = [
-		{
-			id: 1,
-			title: "Very long title in here, needs to be longer",
-			date: new Date(),
-			category: "Art",
-			location: "Paris",
-			description:
-				"\
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-					",
-			image: "https://i.pinimg.com/originals/19/fc/a4/19fca473bd84d1a7ea39c76b07193352.jpg",
-			author: {
-				id: 5,
-				name: "Hassan Chehab",
-			},
-		},
-		{
-			id: 2,
-			title: "Gaming",
-			date: new Date(),
-			category: "Art",
-			location: "Paris",
-			description:
-				"\
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-					",
-			image: "https://larevuetech.fr/wp-content/uploads/2023/03/Meilleurs-ecrans-gaming-4k-2023-scaled.jpg",
-			author: {
-				id: 6,
-				name: "Unkown",
-			},
-		},
-		{
-			id: 3,
-			title: "Cooking",
-			date: new Date(),
-			category: "Art",
-			location: "Paris",
-			description:
-				"\
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-					",
-			image: "https://wallpapercave.com/wp/wp9319078.jpg",
-			author: {
-				id: 6,
-				name: "Unkown",
-			},
-		},
-	];
+	const response = await eventService.fetchEvents();
+	const data = await response.json();
 
-	const fetchedEvent = mockedData.find(
-		(event) => event.id === Number(query.id)
-	);
+	const fetchedEvent = data.find((event) => event.id === Number(query.id));
 
 	return {
 		props: { fetchedEvent: JSON.parse(JSON.stringify(fetchedEvent)) },
@@ -93,9 +30,23 @@ function TopRow({
 	fetchedEvent: Event;
 	isAuthenticated: boolean;
 }) {
+	const router = useRouter();
+	const { data } = useSession();
+	const isAuthor = fetchedEvent.author.email === data?.user.email;
 	const formattedDate = dateUtils.getEventPageTopBlockFormattedDate(
 		fetchedEvent.date
 	);
+
+	const deleteEvent = async () => {
+		try {
+			await eventService.deleteEvent(router.query.id);
+			router.push("/home");
+		} catch (err) {
+			// Maybe add notification
+			console.log(err);
+		}
+	};
+
 	return (
 		<>
 			<div className="w-full lg:flex">
@@ -107,7 +58,8 @@ function TopRow({
 				"
 				>
 					<Image
-						layout="fill"
+						fill
+						objectFit="cover"
 						src={fetchedEvent.image}
 						alt="card image"
 					/>
@@ -117,7 +69,9 @@ function TopRow({
 				<div className="relative w-full lg:h-inherit xs:h-[30em]">
 					{/* actions div if authenticated */}
 					<div className="absolute top-[10%]  w-full pl-24">
-						<ConditionalRendering shouldDisplay={isAuthenticated}>
+						<ConditionalRendering
+							shouldDisplay={isAuthenticated && isAuthor}
+						>
 							<div className="flex gap-4">
 								<div className="w-[150px] mt-8">
 									<OutlinedButton
@@ -129,14 +83,10 @@ function TopRow({
 										}
 									/>
 								</div>
-								<div className="w-[150px] mt-8">
+								<div className="w-[100px] mt-8">
 									<DangerButton
 										label="delete"
-										action={() =>
-											console.log(
-												"no action for this button"
-											)
-										}
+										action={deleteEvent}
 									/>
 								</div>
 							</div>
@@ -156,7 +106,7 @@ function TopRow({
 							<p className="font-bold text-sm">
 								by&nbsp;
 								<span className="text-myPurple">
-									{fetchedEvent.author.name}
+									{isAuthor ? "Me" : fetchedEvent.author.name}
 								</span>
 							</p>
 						</div>
@@ -183,7 +133,7 @@ function BottomDiv({ fetchedEvent }) {
 		<div
 			className="
 			bg-myLightBlue lg:flex w-fill
-			lg:h-[35em] xs:h-fit-content lg:pl-24 xs:pl-16
+			lg:h-[35em] xs:h-fit-content lg:pl-24 xs:pl-16 xs:pb-[10em]
 		"
 		>
 			<div className="lg:mt-16 xs:mt-8 w-full">

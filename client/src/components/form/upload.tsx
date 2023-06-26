@@ -42,6 +42,7 @@ export default function Upload({
 					<ConditionalRendering shouldDisplay={selectedImage}>
 						<Image
 							fill
+							objectFit="cover"
 							src={selectedImage}
 							alt="Selcted Event Image"
 						/>

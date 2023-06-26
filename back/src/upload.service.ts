@@ -1,13 +1,23 @@
-import { join } from 'path';
 import * as fs from 'fs';
+import { join } from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 export class UploadService {
-	generateFile(file) {
+	isFileValid(file: any) {
+		console.log(file.mimetype);
+		const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
+
+		return allowedExtensions.includes(file.mimetype);
+	}
+
+	generateFile(file: any) {
+		const uuid = uuidv4();
 		const path = join(__dirname, '..', 'public');
-		const folderContent = fs.readdirSync(path);
 
-		fs.writeFileSync(`${path}/image-${folderContent.length}.jpg`, file.buffer);
+		fs.writeFileSync(`${path}/${uuid}.jpg`, file.buffer);
 
-		return `${process.env.SERVER_URL}/image-${folderContent.length}.jpg`;
+		const url = `${process.env.SERVER_URL}/${uuid}.jpg`;
+
+		return url;
 	}
 }

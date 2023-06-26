@@ -1,72 +1,19 @@
-// Todo: remove once back is operational
-const mockedData = [
-	{
-		id: 1,
-		title: "Very long title in here, needs to be longer",
-		date: new Date(),
-		category: "Art",
-		location: "Paris",
-		description:
-			"\
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-					",
-		image: "https://i.pinimg.com/originals/19/fc/a4/19fca473bd84d1a7ea39c76b07193352.jpg",
-		author: {
-			id: 5,
-			name: "Hassan Chehab",
-		},
-	},
-	{
-		id: 2,
-		title: "Gaming",
-		date: new Date(),
-		category: "Art",
-		location: "Paris",
-		description:
-			"\
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-					",
-		image: "https://larevuetech.fr/wp-content/uploads/2023/03/Meilleurs-ecrans-gaming-4k-2023-scaled.jpg",
-		author: {
-			id: 6,
-			name: "Unkown",
-		},
-	},
-	{
-		id: 3,
-		title: "Cooking",
-		date: new Date(),
-		category: "Art",
-		location: "Paris",
-		description:
-			"\
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-						fdaklfjda fdafkdjfhdakfjakjf dkjfdhafkajfkjdahfdalkjf dajfaihfadkjfdaj fahfdkajf adfhdaflkjaf adfkjhadflkjad fadhfadklfjad fajfkafj \
-					",
-		image: "https://wallpapercave.com/wp/wp9319078.jpg",
-		author: {
-			id: 6,
-			name: "Unkown",
-		},
-	},
-];
-
 import "@/styles/animations.css";
+import type { GetServerSideProps } from "next";
+import eventService from "@/services/event-service";
 import HomeCard from "@/components/home/home-card";
 import PrimaryButton from "@/components/shared/primary-button";
 
-export default function HomePage() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const response = await eventService.fetchEvents();
+	const data = await response.json();
+
+	return {
+		props: { fetchedEvents: JSON.parse(JSON.stringify(data)) },
+	};
+};
+
+export default function HomePage({ fetchedEvents }: any[]) {
 	// Todo: replace that variable by the actual value from nextAuth
 	const isAuthenticated = false;
 
@@ -88,11 +35,11 @@ export default function HomePage() {
 				2xl:ml-24 2xl:mr-24 2xl:mt-4  md:ml-8 md:mr-8 md:mt-4    xs:ml-4 xs:mr-4 xs:mt-4
 			"
 			>
-				{mockedData.map((event, idx) => {
+				{fetchedEvents.map((event, idx) => {
 					return (
 						<div
 							key={event.id}
-							className="home-card-slide-left"
+							className="home-card-slide-left pb-[5em]"
 							style={{ animationDelay: `${100 * idx}ms` }}
 						>
 							<HomeCard {...event} />
@@ -100,7 +47,7 @@ export default function HomePage() {
 					);
 				})}
 			</div>
-			<div className="w-[150px] m-auto">
+			<div className="w-[150px] m-auto xs:mb-[10em]">
 				<PrimaryButton
 					label="See More"
 					action={() => console.log("no action for this button")}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Upload from "@/components/form/upload";
 import EventForm from "@/components/form/event-form";
@@ -18,23 +19,22 @@ export default function EventFormPage() {
 		description: "",
 	});
 
+	const router = useRouter();
 	const [selectedImage, setSelectedImage] = useState("");
 	const [selectedFile, setSelectedFile] = useState<File>();
 
-	// Author
-	console.log(">>>>>>>>>>>>>>>>>>>>>>>>", data?.user.email);
-
 	const createEvent = async () => {
-		try {
-			const formData = new FormData();
+		const formData = new FormData();
 
+		try {
 			formData.append("image", selectedFile);
 			formData.append("authorId", data?.user.email);
 			for (const key in form) formData.append(key, form[key]);
-
 			await eventApiService.createEvent(formData);
-		} catch (error) {
-			console.log("!!!!!!error occured: ", error);
+			router.push("/home");
+		} catch (err) {
+			// If i have time add notification
+			console.log(err);
 		}
 	};
 
@@ -93,7 +93,7 @@ export default function EventFormPage() {
 				{/* Button */}
 				<div
 					className="
-				2xl:ml-24 2xl:mr-24 2xl:mt-8 md:ml-8 md:mr-8 md:mt-8    xs:ml-4 xs:mr-4 mt-8
+				2xl:ml-24 2xl:mr-24 2xl:mt-24 md:ml-8 md:mr-8 md:mt-24    xs:ml-4 xs:mr-4 mt-8
 			"
 				>
 					<PrimaryButton label="Continue" action={createEvent} />
