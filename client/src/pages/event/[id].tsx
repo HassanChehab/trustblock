@@ -48,6 +48,10 @@ function TopRow({
 		}
 	};
 
+	const goToUpdatePage = () => {
+		router.push(`/event/update/${router.query.id}`);
+	};
+
 	return (
 		<>
 			<div className="w-full lg:flex">
@@ -77,11 +81,7 @@ function TopRow({
 								<div className="w-[150px] mt-8">
 									<OutlinedButton
 										label="update event"
-										action={() =>
-											console.log(
-												"no action for this button"
-											)
-										}
+										action={goToUpdatePage}
 									/>
 								</div>
 								<div className="w-[100px] mt-8">

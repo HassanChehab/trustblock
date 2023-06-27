@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class UploadService {
 	isFileValid(file: any) {
-		console.log(file.mimetype);
 		const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
 
 		return allowedExtensions.includes(file.mimetype);

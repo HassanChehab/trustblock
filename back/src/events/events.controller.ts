@@ -1,5 +1,6 @@
 import {
 	Controller,
+	Put,
 	Get,
 	Post,
 	Body,
@@ -91,9 +92,65 @@ export class EventsController {
 		return this.eventsService.findOne(Number(id));
 	}
 
-	@Patch(':id')
-	update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-		return this.eventsService.update(Number(id), updateEventDto);
+	@Put('/:id')
+	@UseInterceptors(FileInterceptor('image'))
+	update(
+		@Param('id') id: string,
+		@UploadedFile() file: Express.Multer.File,
+		@Body() data: any,
+	) {
+		const validLocations = [
+			'paris',
+			'tokyo',
+			'dubai',
+			'blida',
+			'madrid',
+			'gotham',
+			'london',
+			'wakanda',
+			'new york',
+			'istanbul',
+		];
+
+		const { registeredImage, ...otherReceivedFields } = data;
+		let eventData: CreateEventDto = {
+			...otherReceivedFields,
+			image: registeredImage,
+		};
+
+		// Check if location is valid
+		if (!validLocations.includes(data?.location.toLowerCase()))
+			throw new HttpException(
+				'You did not provide a valid location',
+				HttpStatus.BAD_REQUEST,
+			);
+
+		try {
+			// Check if image is valid
+
+			if (file) {
+				const isValid = this.uploadService.isFileValid(file);
+
+				if (!isValid)
+					throw new HttpException('Invalid File', HttpStatus.FORBIDDEN);
+
+				// Generate image store it in public folder and get Url
+				const url: string = this.uploadService.generateFile(file);
+
+				// Create Object prior to event Update
+				eventData.image = url;
+			}
+
+			this.eventsService.update(Number(id), eventData);
+
+			return { status: HttpStatus.OK };
+		} catch (error) {
+			console.log('', error);
+			throw new HttpException(
+				'Internal Server Error',
+				HttpStatus.INTERNAL_SERVER_ERROR,
+			);
+		}
 	}
 
 	@Delete(':id')

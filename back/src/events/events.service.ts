@@ -52,8 +52,11 @@ export class EventsService {
     return this.prisma.event.findUnique({ where: { id } });
   }
 
-  update(id: number, data: UpdateEventDto) {
-    return this.prisma.event.update({ data, where: { id } });
+  async update(id: number, data: CreateEventDto) {
+    const rest = await this.prisma.event.update({
+      where: { id },
+      data: { ...data },
+    });
   }
 
   remove(id: number) {

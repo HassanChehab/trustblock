@@ -16,7 +16,6 @@ export default function Navbar({
 	search: string | null;
 }) {
 	const router = useRouter();
-	console.log(router);
 	const dataForInput = { search };
 	const { data: session, status } = useSession();
 	const isAuthenticated = status === "authenticated";

@@ -36,6 +36,7 @@ export default function IconInput({
 			<div>{iconList[iconType]}</div>
 			<input
 				type="text"
+				value={userInput}
 				placeholder={placeholder}
 				onChange={(e: any) =>
 					dataModifier({

@@ -19,6 +19,7 @@ export default function EventForm({
 			>
 				<input
 					type="text"
+					value={form.title}
 					placeholder="Event Title"
 					onChange={(e: any) =>
 						setForm({ ...form, title: e.target.value })
@@ -28,6 +29,7 @@ export default function EventForm({
 
 				<select
 					name="Category"
+					value={form.category}
 					onChange={(e: any) =>
 						setForm({ ...form, category: e.target.value })
 					}
@@ -49,6 +51,7 @@ export default function EventForm({
 			{/* Description */}
 			<textarea
 				rows={6}
+				value={form.description}
 				placeholder="Description"
 				onChange={(e: any) =>
 					setForm({ ...form, description: e.target.value })

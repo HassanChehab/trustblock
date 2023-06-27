@@ -7,7 +7,7 @@ import PrimaryButton from "@/components/shared/primary-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export default function HomePage({ searchForm }: { searchForm: any }) {
-	const takeNumber = 2;
+	const takeNumber = 10;
 	const [pageNumber, setPageNumber] = useState(0);
 	const [savedEvents, setSavedEvents] = useState([]);
 	const [fetchedEvents, setFetchedEvents] = useState([]);

@@ -19,8 +19,6 @@ export default function Upload({
 			setSelectedImage(URL.createObjectURL(file));
 			setSelectedFile(file);
 		}
-
-		console.log(selectedImage);
 	};
 
 	return (
