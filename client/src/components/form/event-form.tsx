@@ -36,16 +36,19 @@ export default function EventForm({
 					<option value="" disabled selected>
 						Category
 					</option>
-					<option value="volvo">Volvo</option>
-					<option value="saab">Saab</option>
-					<option value="opel">Opel</option>
-					<option value="audi">Audi</option>
+					<option value="Art">Art</option>
+					<option value="Music">Music</option>
+					<option value="Online">Online</option>
+					<option value="Cinema">Cinema</option>
+					<option value="Gaming">Gaming</option>
+					<option value="Meet Up">Meet Up</option>
+					<option value="Cooking">Coocking</option>
 				</select>
 			</div>
 
 			{/* Description */}
 			<textarea
-				rows={8}
+				rows={6}
 				placeholder="Description"
 				onChange={(e: any) =>
 					setForm({ ...form, description: e.target.value })
@@ -64,7 +67,7 @@ export default function EventForm({
 					iconType="calendar"
 					userInput={form.date}
 					dataModifier={setForm}
-					placeholder="Event Date"
+					placeholder="Event Date  DD/MM/YYYY"
 				/>
 			</div>
 

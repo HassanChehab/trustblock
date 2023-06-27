@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Router from "next/router";
 import { Author, Event } from "../../types";
+import { useSession } from "next-auth/react";
 import dateUtils from "@/services/date-utils";
 import stringUtils from "@/services/string-utils";
 
@@ -27,6 +28,9 @@ export default function HomeCard({
 		});
 	};
 
+	const { data } = useSession();
+	const isAuthor = author.email === data?.user.email;
+
 	return (
 		<div
 			onClick={cardClicked}
@@ -41,7 +45,7 @@ export default function HomeCard({
 					{formattedTitle}
 				</h3>
 				<p className="font-bold text-myDarkGrey absolute bottom-4 left-4">
-					{author.name}
+					{isAuthor ? "Me" : author.name}
 				</p>
 			</div>
 		</div>

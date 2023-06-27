@@ -6,6 +6,7 @@ import dateUtils from "@/services/date-utils";
 import type { GetServerSideProps } from "next";
 import { MdLocationPin } from "react-icons/md";
 import { FaCalendarWeek } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
 import eventService from "@/services/event-service";
 import DangerButton from "@/components/shared/danger-button";
 import PrimaryButton from "@/components/shared/primary-button";
@@ -144,16 +145,28 @@ function BottomDiv({ fetchedEvent }) {
 					<FaCalendarWeek className="w-[30px] h-[30px] text-myPurple" />
 					<div>
 						<p>Date and time: </p>
-						<p>{formattedDate}</p>
+						<p className="font-extrabold">{formattedDate}</p>
 						{/* Hardcode because I don't have a datepicker yet */}
-						<p>1:00 AM - 1:30 AM WIB</p>
+						<p className="font-extrabold">1:00 AM - 1:30 AM WIB</p>
 					</div>
 				</div>
 				<div className="flex gap-4 lg:mt-16 xs: mt-8 xs:pb-8">
 					<MdLocationPin className="w-[35px] h-[35px] text-myPurple" />
 					<div>
 						<p>Location: </p>
-						<p>{fetchedEvent.location}</p>
+						<p className="font-extrabold">
+							{fetchedEvent.location}
+						</p>
+					</div>
+				</div>
+
+				<div className="flex gap-4 lg:mt-16 xs: mt-8 xs:pb-8">
+					<BiSolidCategory className="w-[35px] h-[35px] text-myPurple" />
+					<div>
+						<p>Category: </p>
+						<p className="font-extrabold">
+							{fetchedEvent.category}
+						</p>
 					</div>
 				</div>
 			</div>

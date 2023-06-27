@@ -93,7 +93,7 @@ export default function EventFormPage() {
 				{/* Button */}
 				<div
 					className="
-				2xl:ml-24 2xl:mr-24 2xl:mt-24 md:ml-8 md:mr-8 md:mt-24    xs:ml-4 xs:mr-4 mt-8
+				2xl:ml-24 2xl:mr-24 2xl:mt-18 md:ml-8 md:mr-8 md:mt-18  xs:ml-4 xs:mr-4 xs:mt-8
 			"
 				>
 					<PrimaryButton label="Continue" action={createEvent} />
