@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Layout from "@/components/layout";
 import { SessionProvider } from "next-auth/react";
 
@@ -8,10 +9,12 @@ export default function MyApp({
 	Component: any;
 	pageProps: any;
 }) {
+	const [search, setSearch] = useState(null);
+
 	return (
 		<SessionProvider session={session}>
-			<Layout>
-				<Component {...pageProps} />
+			<Layout searchForm={search} setSearch={setSearch}>
+				<Component {...pageProps} searchForm={search} />
 			</Layout>
 		</SessionProvider>
 	);

@@ -1,21 +1,48 @@
 import "@/styles/animations.css";
+import { useEffect, useState } from "react";
 import type { GetServerSideProps } from "next";
 import eventService from "@/services/event-service";
 import HomeCard from "@/components/home/home-card";
 import PrimaryButton from "@/components/shared/primary-button";
+import ConditionalRendering from "@/components/shared/conditional-rendering";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const response = await eventService.fetchEvents();
-	const data = await response.json();
+export default function HomePage({ searchForm }: { searchForm: any }) {
+	const [fetchedEvents, setFetchedEvents] = useState([]);
 
-	return {
-		props: { fetchedEvents: JSON.parse(JSON.stringify(data)) },
+	const getPaginatedEvents = async () => {
+		const response = await eventService.fetchEvents();
+		const data = await response.json();
+
+		await setFetchedEvents([]);
+		await setFetchedEvents([...fetchedEvents, ...data]);
 	};
-};
 
-export default function HomePage({ fetchedEvents }: any[]) {
-	// Todo: replace that variable by the actual value from nextAuth
-	const isAuthenticated = false;
+	const getPaginatedEventsAfterSearch = async () => {
+		const response = await eventService.fetchEvents();
+		const data = await response.json();
+
+		await setFetchedEvents([...data]);
+	};
+
+	const getSearchedEvents = async () => {
+		const response = await eventService.fetchSearchedEvents(
+			searchForm?.search
+		);
+		const data = await response.json();
+
+		setFetchedEvents([...data]);
+	};
+
+	// Get Events list with limit and offset
+	useEffect(() => {
+		getPaginatedEvents();
+	}, []);
+
+	// fire if search is being modified
+	useEffect(() => {
+		if (searchForm?.search) getSearchedEvents();
+		else getPaginatedEventsAfterSearch();
+	}, [searchForm?.search]);
 
 	return (
 		<div className="w-full h-fit m-h-[100vh] overflow-hidden">
@@ -48,10 +75,12 @@ export default function HomePage({ fetchedEvents }: any[]) {
 				})}
 			</div>
 			<div className="w-[150px] m-auto xs:mb-[10em]">
-				<PrimaryButton
-					label="See More"
-					action={() => console.log("no action for this button")}
-				/>
+				<ConditionalRendering shouldDisplay={!searchForm?.search}>
+					<PrimaryButton
+						label="See More"
+						action={() => console.log("no action for this button")}
+					/>
+				</ConditionalRendering>
 			</div>
 		</div>
 	);

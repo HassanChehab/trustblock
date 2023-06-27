@@ -12,11 +12,11 @@ import {
 	UseInterceptors,
 } from '@nestjs/common';
 
-import { UploadService } from '../upload.service';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
+import { UploadService } from '../utils/upload.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('events')
 export class EventsController {
@@ -79,6 +79,11 @@ export class EventsController {
 	findAll() {
 		// handle offset and pagination
 		return this.eventsService.findAll();
+	}
+
+	@Get('/search/:input')
+	findBySearch(@Param('input') search: string) {
+		return this.eventsService.findBySearch(search);
 	}
 
 	@Get(':id')

@@ -15,6 +15,12 @@ class EventApiService {
 		});
 	}
 
+	fetchSearchedEvents(search) {
+		return fetch(`${process.env.SERVER_URL}/events/search/${search}`, {
+			method: "GET",
+		});
+	}
+
 	deleteEvent(id) {
 		return fetch(`${process.env.SERVER_URL}/events/${id}`, {
 			method: "DELETE",

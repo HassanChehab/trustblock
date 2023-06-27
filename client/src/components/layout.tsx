@@ -1,11 +1,16 @@
 import "../styles/global.css";
-import { useState } from "react";
 import Navbar from "./shared/navbar";
 import Footer from "./shared/footer";
 
-export default function Layout({ children }: { children: any }) {
-	const [search, setSearch] = useState(null);
-
+export default function Layout({
+	children,
+	search,
+	setSearch,
+}: {
+	children: any;
+	search: string;
+	setSearch: Function;
+}) {
 	return (
 		<div className="relative h-[100vh]">
 			<Navbar search={search} setSearch={setSearch} />
