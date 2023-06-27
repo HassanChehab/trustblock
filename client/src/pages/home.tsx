@@ -7,21 +7,26 @@ import PrimaryButton from "@/components/shared/primary-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export default function HomePage({ searchForm }: { searchForm: any }) {
+	const takeNumber = 2;
+	const [pageNumber, setPageNumber] = useState(0);
+	const [savedEvents, setSavedEvents] = useState([]);
 	const [fetchedEvents, setFetchedEvents] = useState([]);
+	const [endOfContent, setEndOfContent] = useState(false);
+	const offset = takeNumber * pageNumber;
 
 	const getPaginatedEvents = async () => {
-		const response = await eventService.fetchEvents();
+		const response = await eventService.fetchEvents(offset, takeNumber);
 		const data = await response.json();
 
+		if (!data.length || data.length < takeNumber) setEndOfContent(true);
+
 		await setFetchedEvents([]);
+		await setSavedEvents([...fetchedEvents, ...data]);
 		await setFetchedEvents([...fetchedEvents, ...data]);
 	};
 
 	const getPaginatedEventsAfterSearch = async () => {
-		const response = await eventService.fetchEvents();
-		const data = await response.json();
-
-		await setFetchedEvents([...data]);
+		setFetchedEvents(savedEvents);
 	};
 
 	const getSearchedEvents = async () => {
@@ -33,6 +38,10 @@ export default function HomePage({ searchForm }: { searchForm: any }) {
 		setFetchedEvents([...data]);
 	};
 
+	const addPage = () => {
+		setPageNumber(pageNumber + 1);
+	};
+
 	// Get Events list with limit and offset
 	useEffect(() => {
 		getPaginatedEvents();
@@ -41,8 +50,15 @@ export default function HomePage({ searchForm }: { searchForm: any }) {
 	// fire if search is being modified
 	useEffect(() => {
 		if (searchForm?.search) getSearchedEvents();
-		else getPaginatedEventsAfterSearch();
+		else {
+			getPaginatedEventsAfterSearch();
+		}
 	}, [searchForm?.search]);
+
+	// fire when page number is modified
+	useEffect(() => {
+		getPaginatedEvents();
+	}, [pageNumber]);
 
 	return (
 		<div className="w-full h-fit m-h-[100vh] overflow-hidden">
@@ -75,11 +91,10 @@ export default function HomePage({ searchForm }: { searchForm: any }) {
 				})}
 			</div>
 			<div className="w-[150px] m-auto xs:mb-[10em]">
-				<ConditionalRendering shouldDisplay={!searchForm?.search}>
-					<PrimaryButton
-						label="See More"
-						action={() => console.log("no action for this button")}
-					/>
+				<ConditionalRendering
+					shouldDisplay={!searchForm?.search && !endOfContent}
+				>
+					<PrimaryButton label="See More" action={addPage} />
 				</ConditionalRendering>
 			</div>
 		</div>

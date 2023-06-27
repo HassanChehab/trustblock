@@ -75,15 +75,15 @@ export class EventsController {
 		}
 	}
 
-	@Get()
-	findAll() {
-		// handle offset and pagination
-		return this.eventsService.findAll();
-	}
-
 	@Get('/search/:input')
 	findBySearch(@Param('input') search: string) {
 		return this.eventsService.findBySearch(search);
+	}
+
+	@Get('/:skip/:take')
+	findAll(@Param('skip') skip: string, @Param('take') take: string) {
+		// handle offset and pagination
+		return this.eventsService.findAll(Number(skip), Number(take));
 	}
 
 	@Get(':id')

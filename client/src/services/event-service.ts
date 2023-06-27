@@ -9,19 +9,19 @@ class EventApiService {
 		});
 	}
 
-	fetchEvents() {
-		return fetch(`${process.env.SERVER_URL}/events`, {
+	fetchEvents(skip: number, take: number) {
+		return fetch(`${process.env.SERVER_URL}/events/${skip}/${take}`, {
 			method: "GET",
 		});
 	}
 
-	fetchSearchedEvents(search) {
+	fetchSearchedEvents(search: string) {
 		return fetch(`${process.env.SERVER_URL}/events/search/${search}`, {
 			method: "GET",
 		});
 	}
 
-	deleteEvent(id) {
+	deleteEvent(id: string) {
 		return fetch(`${process.env.SERVER_URL}/events/${id}`, {
 			method: "DELETE",
 		});

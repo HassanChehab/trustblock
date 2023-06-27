@@ -18,8 +18,14 @@ export class EventsService {
     });
   }
 
-  async findAll() {
-    const events = await this.prisma.event.findMany();
+  async findAll(skip: number, take: number) {
+    const events =
+      isNaN(skip) || isNaN(take)
+        ? await this.prisma.event.findMany()
+        : await this.prisma.event.findMany({
+            skip,
+            take,
+          });
 
     // format Events to match mocked data
     return this.dataFormatter.formatForClient(events);
