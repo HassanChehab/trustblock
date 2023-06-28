@@ -14,7 +14,11 @@ export default function MyApp({
 	return (
 		<SessionProvider session={session}>
 			<Layout searchForm={search} setSearch={setSearch}>
-				<Component {...pageProps} searchForm={search} />
+				<Component
+					{...pageProps}
+					searchForm={search}
+					setSearch={setSearch}
+				/>
 			</Layout>
 		</SessionProvider>
 	);

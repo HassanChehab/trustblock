@@ -9,6 +9,10 @@ import stringUtils from "@/services/string-utils";
 
 import "@/styles/animations.css";
 
+interface Card extends Event {
+	setSearch: Function;
+}
+
 export default function HomeCard({
 	id,
 	date,
@@ -17,8 +21,9 @@ export default function HomeCard({
 	author,
 	category,
 	location,
+	setSearch,
 	description,
-}: Event) {
+}: Card) {
 	const formattedTitle = stringUtils.stringSizeCheck(title);
 	const formattedDate = dateUtils.getHomeCardFormattedDate(date);
 
@@ -26,6 +31,7 @@ export default function HomeCard({
 		Router.push({
 			pathname: `/event/${id}`,
 		});
+		setSearch("");
 	};
 
 	const { data } = useSession();

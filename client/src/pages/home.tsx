@@ -6,7 +6,13 @@ import HomeCard from "@/components/home/home-card";
 import PrimaryButton from "@/components/shared/primary-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
-export default function HomePage({ searchForm }: { searchForm: any }) {
+export default function HomePage({
+	searchForm,
+	setSearch,
+}: {
+	searchForm: any;
+	setSearch: Function;
+}) {
 	const takeNumber = 10;
 	const [pageNumber, setPageNumber] = useState(0);
 	const [savedEvents, setSavedEvents] = useState([]);
@@ -72,7 +78,7 @@ export default function HomePage({ searchForm }: { searchForm: any }) {
 			</h1>
 			<div
 				className="
-				overflow-auto
+				overflow-y-auto overflow-x-hidden
 				w-fit-content min-h-[500px] h-fit-content 
 				flex flex-wrap gap-4 xs:justify-center md:justify-start
 				2xl:ml-24 2xl:mr-24 2xl:mt-4  md:ml-8 md:mr-8 md:mt-4    xs:ml-4 xs:mr-4 xs:mt-4
@@ -85,7 +91,7 @@ export default function HomePage({ searchForm }: { searchForm: any }) {
 							className="home-card-slide-left pb-[5em]"
 							style={{ animationDelay: `${100 * idx}ms` }}
 						>
-							<HomeCard {...event} />
+							<HomeCard {...event} setSearch={setSearch} />
 						</div>
 					);
 				})}

@@ -9,14 +9,14 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export default function Navbar({
-	search,
+	searchForm,
 	setSearch,
 }: {
 	setSearch: Function;
-	search: string | null;
+	searchForm: string | null;
 }) {
 	const router = useRouter();
-	const dataForInput = { search };
+	const dataForInput = searchForm;
 	const { data: session, status } = useSession();
 	const isAuthenticated = status === "authenticated";
 
@@ -61,7 +61,7 @@ export default function Navbar({
 						storedData={dataForInput}
 						targetField="search"
 						iconType="search"
-						userInput={search}
+						userInput={searchForm?.search}
 						dataModifier={setSearch}
 						placeholder=""
 					/>
