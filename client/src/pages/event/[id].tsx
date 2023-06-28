@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Event } from "@types";
+import { Event } from "../../types";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import dateUtils from "@/services/date-utils";
@@ -13,14 +13,12 @@ import PrimaryButton from "@/components/shared/primary-button";
 import OutlinedButton from "@/components/shared/outlined-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-	const response = await eventService.fetchEvents();
-	const data = await response.json();
-
-	const fetchedEvent = data.find((event) => event.id === Number(query.id));
+export const getServerSideProps = async (context) => {
+	const response = await eventService.fetchEventById(context.query?.id);
+	const fetchedEvent = await response.json();
 
 	return {
-		props: { fetchedEvent: JSON.parse(JSON.stringify(fetchedEvent)) },
+		props: { fetchedEvent },
 	};
 };
 
@@ -33,7 +31,7 @@ function TopRow({
 }) {
 	const router = useRouter();
 	const { data } = useSession();
-	const isAuthor = fetchedEvent.author.email === data?.user.email;
+	const isAuthor = fetchedEvent?.author?.email === data?.user.email;
 	const formattedDate = dateUtils.getEventPageTopBlockFormattedDate(
 		fetchedEvent.date
 	);

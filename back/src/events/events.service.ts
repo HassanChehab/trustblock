@@ -48,8 +48,12 @@ export class EventsService {
     return this.dataFormatter.formatForClient(events);
   }
 
-  findOne(id: number) {
-    return this.prisma.event.findUnique({ where: { id } });
+  async findOne(id: number) {
+    const event = await this.prisma.event.findUnique({ where: { id } });
+    const formattedData = this.dataFormatter.formatForClient([event]);
+
+    if (formattedData.length) return formattedData[0];
+    return {};
   }
 
   async update(id: number, data: CreateEventDto) {
