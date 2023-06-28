@@ -35,7 +35,7 @@ export default function HomeCard({
 	};
 
 	const { data } = useSession();
-	const isAuthor = author.email === data?.user.email;
+	const isAuthor = author.email === data?.user?.email;
 
 	return (
 		<div

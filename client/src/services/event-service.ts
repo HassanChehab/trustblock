@@ -9,11 +9,12 @@ class EventApiService {
 		});
 	}
 
-	async upateEvent(data: any, id: string) {
-		await fetch(`${process.env.SERVER_URL}/events/${id}`, {
-			method: "PUT",
-			body: data,
-		});
+	async upateEvent(data: any, id: string | string[] | undefined) {
+		if (id)
+			await fetch(`${process.env.SERVER_URL}/events/${id}`, {
+				method: "PUT",
+				body: data,
+			});
 	}
 
 	fetchEvents(skip: number, take: number) {
@@ -22,10 +23,12 @@ class EventApiService {
 		});
 	}
 
-	fetchEventById(id: string) {
-		return fetch(`${process.env.SERVER_URL}/events/${id}`, {
-			method: "GET",
-		});
+	// According to typescript id can be undefined, coming from getServerSdieProps
+	fetchEventById(id: string | string[] | undefined) {
+		if (id)
+			return fetch(`${process.env.SERVER_URL}/events/${id}`, {
+				method: "GET",
+			});
 	}
 
 	fetchSearchedEvents(search: string) {
@@ -34,10 +37,11 @@ class EventApiService {
 		});
 	}
 
-	deleteEvent(id: string) {
-		return fetch(`${process.env.SERVER_URL}/events/${id}`, {
-			method: "DELETE",
-		});
+	deleteEvent(id: string | string[] | undefined) {
+		if (id)
+			return fetch(`${process.env.SERVER_URL}/events/${id}`, {
+				method: "DELETE",
+			});
 	}
 }
 

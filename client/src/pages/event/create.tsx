@@ -15,15 +15,18 @@ export default function CreatePage() {
 
 	const router = useRouter();
 	const { data, status } = useSession();
+	const [selectedFile, setSelectedFile] = useState();
 	const [selectedImage, setSelectedImage] = useState();
-	const [selectedFile, setSelectedFile] = useState<File>();
 
 	const createEvent = async () => {
 		const formData = new FormData();
 
 		try {
+			// @ts-ignore
 			formData.append("image", selectedFile);
-			formData.append("authorId", data?.user.email);
+			// @ts-ignore
+			formData.append("authorId", data?.user?.email);
+			// @ts-ignore
 			for (const key in form) formData.append(key, form[key]);
 			await eventService.createEvent(formData);
 			router.push("/home");

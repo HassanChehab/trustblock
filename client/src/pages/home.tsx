@@ -1,3 +1,4 @@
+import { Event } from "../types";
 import "@/styles/animations.css";
 import { useEffect, useState } from "react";
 import type { GetServerSideProps } from "next";
@@ -27,7 +28,9 @@ export default function HomePage({
 		if (!data.length || data.length < takeNumber) setEndOfContent(true);
 
 		await setFetchedEvents([]);
+		// @ts-ignore
 		await setSavedEvents([...fetchedEvents, ...data]);
+		// @ts-ignore
 		await setFetchedEvents([...fetchedEvents, ...data]);
 	};
 
@@ -41,6 +44,7 @@ export default function HomePage({
 		);
 		const data = await response.json();
 
+		// @ts-ignore
 		setFetchedEvents([...data]);
 	};
 
@@ -84,7 +88,7 @@ export default function HomePage({
 				2xl:ml-24 2xl:mr-24 2xl:mt-4  md:ml-8 md:mr-8 md:mt-4    xs:ml-4 xs:mr-4 xs:mt-4
 			"
 			>
-				{fetchedEvents.map((event, idx) => {
+				{fetchedEvents.map((event: Event, idx: number) => {
 					return (
 						<div
 							key={event.id}

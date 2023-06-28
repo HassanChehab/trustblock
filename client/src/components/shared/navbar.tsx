@@ -97,7 +97,6 @@ export default function Navbar({
 						<div className="w-[150px]">
 							<DangerButton
 								label="Disconnect"
-								buttonStyle="danger"
 								action={disconnect}
 							/>
 						</div>
@@ -106,11 +105,7 @@ export default function Navbar({
 				<ConditionalRendering shouldDisplay={!isAuthenticated}>
 					<div className="pr-8 mt-auto mb-auto">
 						<div className="w-[100px]">
-							<PrimayButton
-								label="Connect"
-								buttonStyle="primary"
-								action={connect}
-							/>
+							<PrimayButton label="Connect" action={connect} />
 						</div>
 					</div>
 				</ConditionalRendering>

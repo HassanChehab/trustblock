@@ -20,10 +20,10 @@ export default function BaseForm({
 	action: Function;
 	setForm: Function;
 	isUpdate: boolean;
-	selectedFile: File;
 	selectedImage: any;
 	setSelectedFile: Function;
 	setSelectedImage: Function;
+	selectedFile: File | undefined;
 }) {
 	const { data, status } = useSession();
 	const isAuthenticated = status === "authenticated";

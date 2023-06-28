@@ -8,7 +8,7 @@ export default function Layout({
 	searchForm,
 }: {
 	children: any;
-	searchForm: string;
+	searchForm: any;
 	setSearch: Function;
 }) {
 	return (

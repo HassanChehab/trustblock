@@ -1,17 +1,18 @@
 import { useState } from "react";
+import { Event } from "../../../types";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import BaseForm from "@/components/form/base-form";
 import eventService from "@/services/event-service";
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: any) => {
   const response = await eventService.fetchEventById(context.query?.id);
-  const fetchedEvent = await response.json();
+  const fetchedEvent = response ? await response.json() : [];
 
   return { props: { fetchedEvent: JSON.parse(JSON.stringify(fetchedEvent)) } };
 };
 
-export default function UpdatePage({ fetchedEvent }) {
+export default function UpdatePage({ fetchedEvent }: { fetchedEvent: Event }) {
   const [form, setForm] = useState({
     date: fetchedEvent.date,
     title: fetchedEvent.title,
@@ -29,9 +30,13 @@ export default function UpdatePage({ fetchedEvent }) {
     const formData = new FormData();
 
     try {
+      // @ts-ignore
       formData.append("image", selectedFile);
+      // @ts-ignore
       formData.append("authorId", data?.user.email);
+      // @ts-ignore
       formData.append("registeredImage", fetchedEvent.image);
+      // @ts-ignore
       for (const key in form) formData.append(key, form[key]);
       await eventService.upateEvent(formData, router.query?.id);
       router.push("/home");

@@ -13,9 +13,9 @@ import PrimaryButton from "@/components/shared/primary-button";
 import OutlinedButton from "@/components/shared/outlined-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: any) => {
 	const response = await eventService.fetchEventById(context.query?.id);
-	const fetchedEvent = await response.json();
+	const fetchedEvent = response ? await response.json() : [];
 
 	return {
 		props: { fetchedEvent },
@@ -31,7 +31,7 @@ function TopRow({
 }) {
 	const router = useRouter();
 	const { data } = useSession();
-	const isAuthor = fetchedEvent?.author?.email === data?.user.email;
+	const isAuthor = fetchedEvent?.author?.email === data?.user?.email;
 	const formattedDate = dateUtils.getEventPageTopBlockFormattedDate(
 		fetchedEvent.date
 	);
@@ -124,7 +124,7 @@ function TopRow({
 	);
 }
 
-function BottomDiv({ fetchedEvent }) {
+function BottomDiv({ fetchedEvent }: { fetchedEvent: Event }) {
 	const formattedDate = dateUtils.getEventPageLowerBlockFormattedDate(
 		fetchedEvent.date
 	);

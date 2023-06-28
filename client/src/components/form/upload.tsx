@@ -13,7 +13,7 @@ export default function Upload({
 	setSelectedFile: any;
 	setSelectedImage: any;
 }) {
-	const onImageSelction = (target) => {
+	const onImageSelction = (target: any) => {
 		if (target.files) {
 			const file = target.files[0];
 			setSelectedImage(URL.createObjectURL(file));

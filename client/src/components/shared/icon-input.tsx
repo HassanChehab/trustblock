@@ -12,9 +12,9 @@ export default function IconInput({
 	targetField,
 	dataModifier,
 }: {
+	userInput: any;
+	storedData: any;
 	iconType: string;
-	userInput: string;
-	storedData: object;
 	placeholder: string;
 	targetField: string;
 	dataModifier: Function;
