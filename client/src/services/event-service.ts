@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 // Singeltion class that will handle all date formats across the app
 class EventApiService {
 	async createEvent(data: any) {
-		await fetch(`${process.env.SERVER_URL}/events`, {
+		return await fetch(`${process.env.SERVER_URL}/events`, {
 			method: "POST",
 			body: data,
 		});
@@ -11,7 +11,7 @@ class EventApiService {
 
 	async upateEvent(data: any, id: string | string[] | undefined) {
 		if (id)
-			await fetch(`${process.env.SERVER_URL}/events/${id}`, {
+			return await fetch(`${process.env.SERVER_URL}/events/${id}`, {
 				method: "PUT",
 				body: data,
 			});

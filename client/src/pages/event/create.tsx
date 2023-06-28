@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import BaseForm from "@/components/form/base-form";
 import eventService from "@/services/event-service";
+import notificationService from "@/services/notification-service";
 
 export default function CreatePage() {
 	const [form, setForm] = useState({
@@ -28,11 +29,18 @@ export default function CreatePage() {
 			formData.append("authorId", data?.user?.email);
 			// @ts-ignore
 			for (const key in form) formData.append(key, form[key]);
-			await eventService.createEvent(formData);
+			const response = await eventService.createEvent(formData);
+
+			if (response?.ok === false)
+				throw new Error("An error occured on creation.");
+
+			notificationService.simpleNotification(
+				"Event created successfully",
+				"success"
+			);
 			router.push("/home");
 		} catch (err) {
-			// If i have time add notification
-			console.log(err);
+			notificationService.simpleNotification(err, "error");
 		}
 	};
 
