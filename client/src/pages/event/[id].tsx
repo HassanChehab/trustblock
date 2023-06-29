@@ -11,6 +11,7 @@ import eventService from "@/services/event-service";
 import DangerButton from "@/components/shared/danger-button";
 import PrimaryButton from "@/components/shared/primary-button";
 import OutlinedButton from "@/components/shared/outlined-button";
+import notificationService from "@/services/notification-service";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export const getServerSideProps = async (context: any) => {
@@ -38,11 +39,19 @@ function TopRow({
 
 	const deleteEvent = async () => {
 		try {
-			await eventService.deleteEvent(router.query.id);
+			const response = await eventService.deleteEvent(router.query.id);
+
+			if (response?.ok === false)
+				throw new Error("An error occured on deletion.");
+
+			notificationService.simpleNotification(
+				"Event deleted successfully",
+				"success"
+			);
+
 			router.push("/home");
 		} catch (err) {
-			// Maybe add notification
-			console.log(err);
+			notificationService.simpleNotification(err, "error");
 		}
 	};
 

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import BaseForm from "@/components/form/base-form";
 import eventService from "@/services/event-service";
+import notificationService from "@/services/notification-service";
 
 export const getServerSideProps = async (context: any) => {
   const response = await eventService.fetchEventById(context.query?.id);
@@ -38,11 +39,21 @@ export default function UpdatePage({ fetchedEvent }: { fetchedEvent: Event }) {
       formData.append("registeredImage", fetchedEvent.image);
       // @ts-ignore
       for (const key in form) formData.append(key, form[key]);
-      await eventService.upateEvent(formData, router.query?.id);
+      const response = await eventService.upateEvent(
+        formData,
+        router.query?.id
+      );
+
+      if (response?.ok === false) throw new Error("Event update failure");
+
+      notificationService.simpleNotification(
+        "Event updated successfully",
+        "success"
+      );
+
       router.push("/home");
     } catch (err) {
-      // If i have time add notification
-      console.log(err);
+      notificationService.simpleNotification(err, "error");
     }
   };
   return (
