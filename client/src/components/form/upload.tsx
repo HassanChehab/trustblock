@@ -3,11 +3,15 @@ import { BsFillCloudUploadFill } from "react-icons/bs";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export default function Upload({
+	register,
+	isUpdate,
 	selectedFile,
 	selectedImage,
 	setSelectedFile,
 	setSelectedImage,
 }: {
+	register: any;
+	isUpdate: boolean;
 	selectedFile: any;
 	selectedImage: any;
 	setSelectedFile: any;
@@ -25,6 +29,9 @@ export default function Upload({
 		<div className="w-full h-full">
 			<label>
 				<input
+					{...register("image", {
+						required: isUpdate ? false : "Image is required",
+					})}
 					type="file"
 					onChange={({ target }) => onImageSelction(target)}
 					hidden

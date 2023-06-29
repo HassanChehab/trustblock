@@ -47,7 +47,7 @@ export default function CreatePage() {
 	return (
 		<BaseForm
 			form={form}
-			isUpdate={true}
+			isUpdate={false}
 			setForm={setForm}
 			action={createEvent}
 			selectedFile={selectedFile}

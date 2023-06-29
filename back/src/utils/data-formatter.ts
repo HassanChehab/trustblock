@@ -24,9 +24,7 @@ export class DataFormatter {
 			category: this.capitalize(event.category),
 			location: this.capitalize(event.location),
 			description: this.capitalize(event.description),
-			date:
-				dayjs(event.date, 'DD/MM/YYYY').toDate() ||
-				dayjs(event.date, 'DD-MM-YYYY').toDate(),
+			date: event.date,
 			author: {
 				name: 'John Doe',
 				email: event.authorId,
