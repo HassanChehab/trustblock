@@ -3,12 +3,6 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
 export class UploadService {
-	isFileValid(file: any) {
-		const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
-
-		return allowedExtensions.includes(file.mimetype);
-	}
-
 	generateFile(file: any) {
 		const uuid = uuidv4();
 
