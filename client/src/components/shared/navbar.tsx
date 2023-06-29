@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import SearchInput from "./search-input";
-import DangerButton from "./danger-button";
-import PrimayButton from "./primary-button";
+import DangerButton from "./buttons/danger-button";
+import PrimayButton from "./buttons/primary-button";
 import { BiChevronDown } from "react-icons/bi";
-import OutlinedButton from "./outlined-button";
+import OutlinedButton from "./buttons/outlined-button";
 import { useSession, signOut, signIn } from "next-auth/react";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 

@@ -44,7 +44,8 @@ export default function UpdatePage({ fetchedEvent }: { fetchedEvent: Event }) {
         router.query?.id
       );
 
-      if (response?.ok === false) throw new Error("Event update failure");
+      if (response?.ok === false)
+        throw new Error("Image, location or date are invalid");
 
       notificationService.simpleNotification(
         "Event updated successfully",

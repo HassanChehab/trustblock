@@ -32,7 +32,7 @@ export default function CreatePage() {
 			const response = await eventService.createEvent(formData);
 
 			if (response?.ok === false)
-				throw new Error("An error occured on creation.");
+				throw new Error("Image, location or date are invalid.");
 
 			notificationService.simpleNotification(
 				"Event created successfully",
