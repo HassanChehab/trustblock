@@ -17,18 +17,20 @@ export class DataFormatter {
 	}
 
 	formatForClient(events: any) {
-		return events.map((event) => ({
-			id: event.id,
-			image: event.image,
-			title: event.title,
-			category: this.capitalize(event.category),
-			location: this.capitalize(event.location),
-			description: this.capitalize(event.description),
-			date: event.date,
-			author: {
-				name: 'John Doe',
-				email: event.authorId,
-			},
-		}));
+		if (events && events.length)
+			return events.map((event) => ({
+				id: event.id,
+				image: event.image,
+				title: event.title,
+				category: this.capitalize(event.category),
+				location: this.capitalize(event.location),
+				description: this.capitalize(event.description),
+				date: event.date,
+				author: {
+					name: 'John Doe',
+					email: event.authorId,
+				},
+			}));
+		return [];
 	}
 }
