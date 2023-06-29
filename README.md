@@ -6,9 +6,9 @@
 ## Overview
 
 This project uses **NextJs**, **NextAuth**, **NestJs**, and **Prisma** technologies.
-There are two databases. On the front side, the database handles the user connection and session. On the backend, the database is for event creation and modification. I chose to create two **Sqlite** databases to avoid DB configurations. Both of them are with the code. The only action needed is to install dependencies and run the project. <br/><br />
+There are two databases. On the front side, the database handles the user connection and session. On the backend, the database is for event creation and modification. I chose to create two **Sqlite** databases to avoid that you make DB configurations. Both of them are with the code. The only action needed is to install dependencies and run the project. <br/><br />
 For CSS, I chose to work with **TailwindCss** rather than SCSS.
-The reason is that I had many new technologies to work on. I decided to use what I know about CSS to allocate more time to the unknown (Prisma / NextAuth / File Upload / SMTP Server).
+The reason is that I had many new technologies to work on. I decided to use what I know about CSS to allocate more time to the unknown (Prisma / NextAuth / File Upload on Nest / SMTP Server).
 
 In this app, you can log on with NextAuth _EmailProvider_. You can log off.
 Create, update and delete an event if you are the owner.
@@ -74,6 +74,8 @@ The server runs on [http://localhost:4000](http://localhost:4000)
 
 # Tests
 
+I did not have much time for testing. I did few tests on the back end to show that I know how to use Jest. I tested my helpers. But when it comes to controller and services, I couldn't work on them.
+
 <br />
 <br />
 
@@ -114,7 +116,13 @@ The server runs on [http://localhost:4000](http://localhost:4000)
 
 <br />
 
-5. Bonuses
+5. Form
+
+-   > Form control is done on both back end and front end. I use react-hook-form for the client. I had some issues with the display, so It is not exaclty as requested. I decided to not spent much time on debugging that part, so I can work on other subjects. I displayed messages to show that it is working.
+
+<br />
+
+6. Bonuses
 
 -   > NestJs
 -   > Category
@@ -122,9 +130,10 @@ The server runs on [http://localhost:4000](http://localhost:4000)
 
 <br />
 
-6. Additional Features
+7. Additional Features
 
 -   > Search bar is implemented
+-   > Error and confirmation notifications on CREATE / UPDATE / DELETE
 
 <br />
 <br />
@@ -135,6 +144,13 @@ The server runs on [http://localhost:4000](http://localhost:4000)
 -   > Wallet authentication
 -   > End to end testing with Cypress
 -   > Password for user authentication (only an email is needed)
+
+I also thought of other additions that were not on the list but would significantly improve the app.
+I wanted to work on them if I had the time to do it.
+
+-   > Loaders
+-   > An actual date picker.
+-   > A fallback page if the server is down
 
 <br />
 <br />
