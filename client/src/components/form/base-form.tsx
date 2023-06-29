@@ -29,14 +29,17 @@ export default function BaseForm({
 	const { data, status } = useSession();
 	const isAuthenticated = status === "authenticated";
 	const {
+		register,
+		clearErrors,
 		handleSubmit,
 		formState: { errors },
-		register,
 	} = useForm();
 
-	const handleFormSubmit = (_) => {
+	const handleFormSubmit = (_: any) => {
 		action();
 	};
+
+	const isButtonDisabled = !!Object.keys(errors).length;
 
 	return (
 		<div className="w-full h-[100vh] overflow-hidden">
@@ -55,12 +58,14 @@ export default function BaseForm({
 							<Upload
 								isUpdate={isUpdate}
 								register={register}
+								clearErrors={clearErrors}
 								selectedFile={selectedFile}
 								selectedImage={selectedImage}
 								setSelectedFile={setSelectedFile}
 								setSelectedImage={setSelectedImage}
 							/>
 							<p className="w-full text-red-600">
+								{/* @ts-ignore */}
 								{errors?.image?.message}
 							</p>
 						</div>
@@ -72,6 +77,7 @@ export default function BaseForm({
 								setForm={setForm}
 								register={register}
 								formErrors={errors}
+								clearErrors={clearErrors}
 							/>
 						</div>
 					</div>
@@ -81,6 +87,7 @@ export default function BaseForm({
 							label="Continue"
 							action={() => {}}
 							buttonType="submit"
+							disabled={isButtonDisabled}
 						/>
 					</div>
 				</form>

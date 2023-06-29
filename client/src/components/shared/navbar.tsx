@@ -1,6 +1,6 @@
 import Image from "next/image";
-import IconInput from "./icon-input";
 import { useRouter } from "next/router";
+import SearchInput from "./search-input";
 import DangerButton from "./danger-button";
 import PrimayButton from "./primary-button";
 import { BiChevronDown } from "react-icons/bi";
@@ -36,11 +36,23 @@ export default function Navbar({
 		signIn();
 	};
 
+	const goToHome = () => {
+		router.push("/home");
+	};
+
 	return (
 		<div className="flex justify-between bg-white h-[8em]">
 			{/* logo */}
-			<div className="w-[200px] h-[80px] relative mt-auto mb-auto pl-8">
-				<Image layout="fill" src="/header-logo.png" alt="Header logo" />
+			<div
+				className="w-[180px] h-[50px] relative mt-auto mb-auto pl-8"
+				onClick={goToHome}
+			>
+				<Image
+					layout="fill"
+					src="/header-logo.png"
+					alt="Header logo"
+					objectFit="cover"
+				/>
 			</div>
 
 			{/* Search bar */}
@@ -57,7 +69,7 @@ export default function Navbar({
 
 				{/* Other pages regardless of authentication */}
 				<ConditionalRendering shouldDisplay={!isEventForm}>
-					<IconInput
+					<SearchInput
 						storedData={dataForInput}
 						targetField="search"
 						iconType="search"

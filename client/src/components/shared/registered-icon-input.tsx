@@ -10,6 +10,7 @@ export default function RegisterdIconInput({
 	register,
 	userInput,
 	storedData,
+	clearErrors,
 	placeholder,
 	targetField,
 	dataModifier,
@@ -17,6 +18,7 @@ export default function RegisterdIconInput({
 	register: any;
 	userInput: any;
 	storedData: any;
+	clearErrors: any;
 	iconType: string;
 	placeholder: string;
 	targetField: string;
@@ -26,12 +28,17 @@ export default function RegisterdIconInput({
 		pin: (
 			<MdLocationPin className="w-[25px] h-[25px] text-myDarkGrey mt-2 ml-4" />
 		),
-		search: (
-			<AiOutlineSearch className="w-[25px] h-[25px] text-myDarkGrey mt-2 ml-4" />
-		),
 		calendar: (
 			<FaCalendarWeek className="w-[20px] h-[20px] text-myDarkGrey mt-2 ml-4" />
 		),
+	};
+
+	const onInputChange = (newVal: string, targetField: string) => {
+		dataModifier({
+			...storedData,
+			[targetField]: newVal,
+		});
+		clearErrors(targetField);
 	};
 
 	return (
@@ -45,10 +52,7 @@ export default function RegisterdIconInput({
 				value={userInput}
 				placeholder={placeholder}
 				onChange={(e: any) =>
-					dataModifier({
-						...storedData,
-						[targetField]: e.target.value,
-					})
+					onInputChange(e.target.value, targetField)
 				}
 				className="w-full bg-myLightGrey border-transparent focus:border-0 focus:ring-0 placeholder-myDarkGrey"
 			/>

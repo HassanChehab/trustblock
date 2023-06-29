@@ -5,12 +5,14 @@ import ConditionalRendering from "@/components/shared/conditional-rendering";
 export default function Upload({
 	register,
 	isUpdate,
+	clearErrors,
 	selectedFile,
 	selectedImage,
 	setSelectedFile,
 	setSelectedImage,
 }: {
 	register: any;
+	clearErrors: any;
 	isUpdate: boolean;
 	selectedFile: any;
 	selectedImage: any;
@@ -22,6 +24,7 @@ export default function Upload({
 			const file = target.files[0];
 			setSelectedImage(URL.createObjectURL(file));
 			setSelectedFile(file);
+			clearErrors("image");
 		}
 	};
 
