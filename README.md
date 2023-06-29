@@ -50,7 +50,7 @@ Those variables are also in the file: _next.config.js_ as NextJs has trouble fet
 
 <br />
 
-The following commands are needed to run the project localy. Make sure you are in the <span style="color: red;">**dev**</span> branch, main is used with deployement configuration.
+The following commands are needed to run the project localy. <span style="color: red">Make sure you are in the **dev**</span> branch, main is used with deployement configuration.
 
 ```bash
 	// In the back folder
@@ -108,6 +108,8 @@ They are failing for some reason. The tests that I made passes.
 -   > I set up an SMTP server via one of my Gmail addresses. The credentials are in the .env file. It should be good to go on launch.
 
 -   > If you are logged in, you cannot sign in.
+
+-   > A good brandwidth is needed, otherwise the email might not be sent.
 
 <br />
 
