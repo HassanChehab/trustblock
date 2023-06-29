@@ -2,9 +2,9 @@ import { Event } from "../types";
 import "@/styles/animations.css";
 import { useEffect, useState } from "react";
 import type { GetServerSideProps } from "next";
-import eventService from "@/services/event-service";
 import HomeCard from "@/components/home/home-card";
-import PrimaryButton from "@/components/shared/primary-button";
+import eventService from "@/services/event-service";
+import PrimaryButton from "@/components/shared/buttons/primary-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export default function HomePage({
@@ -100,7 +100,7 @@ export default function HomePage({
 					);
 				})}
 			</div>
-			<div className="w-[150px] m-auto xs:mb-[10em]">
+			<div className="w-[150px] m-auto xs:mb-[10em] button-fade-in">
 				<ConditionalRendering
 					shouldDisplay={!searchForm?.search && !endOfContent}
 				>

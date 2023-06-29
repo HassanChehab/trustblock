@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import Upload from "@/components/form/upload";
 import EventForm from "@/components/form/event-form";
 import eventService from "@/services/event-service";
-import PrimaryButton from "@/components/shared/primary-button";
+import PrimaryButton from "@/components/shared/buttons/primary-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 import { useForm } from "react-hook-form";
 

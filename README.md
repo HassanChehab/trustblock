@@ -150,6 +150,7 @@ I wanted to work on them if I had the time to do it.
 
 -   > Loaders
 -   > An actual date picker.
+-   > Smooth transitions between pages
 -   > A fallback page if the server is down
 
 <br />

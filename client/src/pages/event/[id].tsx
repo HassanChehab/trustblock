@@ -8,10 +8,10 @@ import { MdLocationPin } from "react-icons/md";
 import { FaCalendarWeek } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
 import eventService from "@/services/event-service";
-import DangerButton from "@/components/shared/danger-button";
-import PrimaryButton from "@/components/shared/primary-button";
-import OutlinedButton from "@/components/shared/outlined-button";
 import notificationService from "@/services/notification-service";
+import DangerButton from "@/components/shared/buttons/danger-button";
+import PrimaryButton from "@/components/shared/buttons/primary-button";
+import OutlinedButton from "@/components/shared/buttons/outlined-button";
 import ConditionalRendering from "@/components/shared/conditional-rendering";
 
 export const getServerSideProps = async (context: any) => {
@@ -51,7 +51,7 @@ function TopRow({
 
 			router.push("/home");
 		} catch (err) {
-			notificationService.simpleNotification(err, "error");
+			notificationService.simpleNotification(err.message, "error");
 		}
 	};
 
